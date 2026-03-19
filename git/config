@@ -1,0 +1,196 @@
+[user]
+    name = Paulo Tumabing
+    email = shroomyroomyk@gmail.com
+
+[core]
+    compression = 9
+    editor = code --wait
+    whitespace = error
+    preloadindex = true
+    pager = delta
+    excludesfile = ~/.gitignore_global
+
+[init]
+    defaultBranch = main
+
+[advice]
+    statusHints = false
+    addEmptyPathspec = false
+    pushNonFastForward = false
+    skippedCherryPicks = false
+
+[url "git@github.com:shrxmy"]
+    insteadOf = "shrm:"
+
+[url "git@github.com:"]
+    insteadOf = "gh:"
+
+[status]
+    branch = true
+    showStash = true
+    showUntrackedFiles = all
+    aheadBehind = true
+
+[diff]
+    context = 3
+    renames = copies
+    interHunkContext = 10
+    algorithm = histogram
+    colorMoved = dimmed_zebra
+    colorMovedWS = allow-indentation-change
+
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+    branch = false
+    tag = false
+
+[delta]
+    navigate = true
+    light = false
+    side-by-side = false
+    line-numbers-left-style = blue
+    line-numbers-right-style = blue
+    line-numbers-minus-style = 124
+    line-numbers-plus-style = 28
+    syntax-theme = Monokai Extended
+
+[color "diff"]
+    meta = yellow bold
+    frag = magenta
+    context = white
+    whitespace = yellow reverse
+    old = red bold
+    new = green bold
+
+[interactive]
+    diffFilter = delta --color-only
+    singleKey = true
+
+[push]
+    autoSetupRemote = true
+    default = current
+    followTags = true
+
+[pull]
+    default = current
+    rebase = true
+    autoStash = true
+
+[fetch]
+    prune = true
+    pruneTags = true
+
+[rebase]
+    autoStash = true
+    missingCommitsCheck = warn
+    stat = true
+    abbreviateCommands = true
+
+[commit]
+    gpgSign = false
+    verbose = true
+
+[merge]
+    conflictStyle = zdiff3
+    ff = only
+
+[log]
+    abbrevCommit = true
+    graphColors = blue, yellow, cyan, magenta, green, red
+    date = short
+    decorate = short
+
+[color "decorate"]
+    HEAD = red bold
+    branch = blue bold
+    tag = yellow bold
+    remoteBranch = cyan bold
+
+[color "branch"]
+    current = magenta bold
+    local = blue
+    remote = yellow
+    upstream = green
+    plain = cyan
+
+[branch]
+    sort = -committerdate
+
+[tag]
+    sort = -taggerdate
+
+[alias]
+    # Status & Info
+    st = status -sb
+    ss = status -sb
+    br = branch -vv
+    bra = branch -avv
+    brr = "!git branch --sort=-committerdate | head -20"
+    
+    # Viewing
+    l = log --oneline --graph --decorate --all
+    ll = log -20 --oneline --graph --decorate --all
+    lll = log --oneline --graph --decorate --all
+    show-graph = log --graph --oneline --all --decorate
+    recent = log --oneline -n 20
+    
+    # Diffs
+    dft = diff --stat
+    dc = diff --cached
+    dtree = diff-tree --no-patch --stat
+    
+    # Committing
+    c = commit -v
+    cm = commit -m
+    amend = commit --amend --no-edit
+    
+    # Staging
+    a = add
+    ap = add -p
+    au = add -u
+    aa = add -A
+    
+    # Checkout
+    co = checkout
+    cob = checkout -b
+    
+    # Stash
+    sta = stash
+    stap = stash pop
+    stal = stash list
+    
+    # Clean
+    undo = reset --soft HEAD~1
+    undohard = reset --hard HEAD~1
+    unstage = reset HEAD --
+    
+    # Push/Pull
+    p = push
+    pf = push --force-with-lease
+    pl = pull
+    plr = pull --rebase
+    
+    # Remote
+    rv = remote -v
+    
+    # Helpful
+    who = shortlog -s --since="2 weeks" -n 20
+    blame-line = blame -L
+    contributors = shortlog --summary --numbered
+
+[gc]
+    autodetach = true
+
+[feature]
+    manyFiles = true
+
+[credential "https://github.com"]
+    helper =
+    helper = !/usr/bin/gh auth git-credential
+
+[credential "https://gist.github.com"]
+    helper =
+    helper = !/usr/bin/gh auth git-credential

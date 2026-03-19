@@ -1,0 +1,7 @@
+# dotfiles managed shell helpers
+
+# Initialize oh-my-posh if installed and theme exists.
+if command -v oh-my-posh >/dev/null 2>&1 && [ -f "$HOME/.config/oh-my-posh/theme.omp.json" ]; then
+  eval "$(oh-my-posh init bash --config "$HOME/.config/oh-my-posh/theme.omp.json")"
+fi
+
