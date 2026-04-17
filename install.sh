@@ -150,6 +150,9 @@ main() {
   # fastfetch
   link_file "$DOTFILES_DIR/fastfetch/config.jsonc" "$HOME/.config/fastfetch/config.jsonc"
 
+  # Alacritty terminal (Linux + macOS)
+  link_file "$DOTFILES_DIR/alacritty/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
+
   # dunst (Linux notification daemon)
   if [[ "$(uname -s)" == "Linux" ]]; then
     link_file "$DOTFILES_DIR/dunst/dunstrc" "$HOME/.config/dunst/dunstrc"
@@ -166,6 +169,10 @@ main() {
 
   # GTK & fonts (Linux only)
   if [[ "$(uname -s)" == "Linux" ]]; then
+    # Konsole (KDE terminal)
+    link_file "$DOTFILES_DIR/konsole/Solyvie.profile" "$HOME/.local/share/konsole/Solyvie.profile"
+    link_file "$DOTFILES_DIR/konsole/Solyvie-Alacritty.colorscheme" "$HOME/.local/share/konsole/Solyvie-Alacritty.colorscheme"
+
     link_file "$DOTFILES_DIR/gtk/gtk-3.0/settings.ini" "$HOME/.config/gtk-3.0/settings.ini"
     link_file "$DOTFILES_DIR/gtk/gtk-4.0/settings.ini" "$HOME/.config/gtk-4.0/settings.ini"
     link_file "$DOTFILES_DIR/gtk/gtkrc-2.0" "$HOME/.gtkrc-2.0"

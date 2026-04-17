@@ -19,6 +19,14 @@ if [ -f "$HOME/.bash_aliases" ]; then
   . "$HOME/.bash_aliases"
 fi
 
+# Ensure user-local binaries are available (oh-my-posh lives here on this setup)
+export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+
+# Prompt (oh-my-posh)
+if command -v oh-my-posh >/dev/null 2>&1; then
+  eval "$(oh-my-posh init zsh --config "$HOME/.config/oh-my-posh/theme.omp.json")"
+fi
+
 # Homebrew (cross-platform)
 if [[ "$(uname -s)" == "Darwin" ]]; then
   if [[ -x /opt/homebrew/bin/brew ]]; then

@@ -11,6 +11,9 @@ Minimal dotfiles setup with safe symlink installation for Linux and macOS.
 - `zsh/zprofile` -> `~/.zprofile`
 - `oh-my-posh/theme.omp.json` -> `~/.config/oh-my-posh/theme.omp.json`
 - `npm/npmrc` -> `~/.npmrc`
+- `alacritty/alacritty.toml` -> `~/.config/alacritty/alacritty.toml`
+- `konsole/Solyvie.profile` -> `~/.local/share/konsole/Solyvie.profile` (Linux)
+- `konsole/Solyvie-Alacritty.colorscheme` -> `~/.local/share/konsole/Solyvie-Alacritty.colorscheme` (Linux)
 
 ## Included now
 
