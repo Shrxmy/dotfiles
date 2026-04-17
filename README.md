@@ -7,6 +7,8 @@ Minimal dotfiles setup with safe symlink installation for Linux and macOS.
 - `git/config` -> `~/.gitconfig`
 - `git/ignore` -> `~/.gitignore_global`
 - `shell/bash_aliases` -> `~/.bash_aliases`
+- `zsh/zshrc` -> `~/.zshrc`
+- `zsh/zprofile` -> `~/.zprofile`
 - `oh-my-posh/theme.omp.json` -> `~/.config/oh-my-posh/theme.omp.json`
 - `npm/npmrc` -> `~/.npmrc`
 

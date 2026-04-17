@@ -1,0 +1,10 @@
+# ~/.zprofile: executed by zsh(1) for login shells.
+
+# include user's private bin in PATH
+if [ -d "$HOME/bin" ]; then
+  export PATH="$HOME/bin:$PATH"
+fi
+
+if [ -d "$HOME/.local/bin" ]; then
+  export PATH="$HOME/.local/bin:$PATH"
+fi

@@ -134,6 +134,10 @@ main() {
   link_file "$DOTFILES_DIR/bash/bashrc" "$HOME/.bashrc"
   link_file "$DOTFILES_DIR/bash/profile" "$HOME/.profile"
 
+  # Zsh
+  link_file "$DOTFILES_DIR/zsh/zshrc" "$HOME/.zshrc"
+  link_file "$DOTFILES_DIR/zsh/zprofile" "$HOME/.zprofile"
+
   # Shell tools
   link_file "$DOTFILES_DIR/shell/bash_aliases" "$HOME/.bash_aliases"
 
