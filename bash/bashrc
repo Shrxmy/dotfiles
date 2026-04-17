@@ -135,6 +135,8 @@ unset __mamba_setup
 export PATH="/usr/sbin:$PATH"
 export PATH="/usr/bin:/usr/sbin:$PATH"
 
-# CUDA 12.9
-export PATH=/usr/local/cuda-12.9/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda-12.9/lib64:$LD_LIBRARY_PATH
+# CUDA 12.9 (Linux-only, if installed)
+if [ "$(uname -s)" = "Linux" ] && [ -d "/usr/local/cuda-12.9/bin" ]; then
+  export PATH="/usr/local/cuda-12.9/bin:$PATH"
+  export LD_LIBRARY_PATH="/usr/local/cuda-12.9/lib64${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+fi
