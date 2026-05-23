@@ -140,6 +140,9 @@ main() {
 
   # Shell tools
   link_file "$DOTFILES_DIR/shell/bash_aliases" "$HOME/.bash_aliases"
+  link_file "$DOTFILES_DIR/shell/common.sh" "$HOME/.config/shell/common.sh"
+  link_file "$DOTFILES_DIR/shell/linux.sh" "$HOME/.config/shell/linux.sh"
+  link_file "$DOTFILES_DIR/shell/macos.sh" "$HOME/.config/shell/macos.sh"
 
   # oh-my-posh
   link_file "$DOTFILES_DIR/oh-my-posh/theme.omp.json" "$HOME/.config/oh-my-posh/theme.omp.json"

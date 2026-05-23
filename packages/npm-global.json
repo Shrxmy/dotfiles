@@ -1,0 +1,13 @@
+{
+  "name": "lib",
+  "dependencies": {
+    "corepack": {
+      "version": "0.34.6",
+      "overridden": false
+    },
+    "npm": {
+      "version": "11.12.1",
+      "overridden": false
+    }
+  }
+}

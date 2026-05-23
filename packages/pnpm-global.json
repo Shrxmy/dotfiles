@@ -1,0 +1,23 @@
+[
+  {
+    "path": "/home/solyviemiyu/.local/share/pnpm/global/v11",
+    "private": true,
+    "dependencies": {
+      "@earendil-works/pi-coding-agent": {
+        "from": "@earendil-works/pi-coding-agent",
+        "version": "0.75.4",
+        "path": "/home/solyviemiyu/.local/share/pnpm/global/v11/1aa8-19e537c61d0/node_modules/@earendil-works/pi-coding-agent"
+      },
+      "@openai/codex": {
+        "from": "@openai/codex",
+        "version": "0.133.0",
+        "path": "/home/solyviemiyu/.local/share/pnpm/global/v11/2ff4-19e538f5999/node_modules/@openai/codex"
+      },
+      "@pnpm/exe": {
+        "from": "@pnpm/exe",
+        "version": "11.2.2",
+        "path": "/home/solyviemiyu/.local/share/pnpm/global/v11/179d-19e537af180/node_modules/@pnpm/exe"
+      }
+    }
+  }
+]

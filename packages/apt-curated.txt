@@ -1,0 +1,110 @@
+# Curated apt package list
+# Focus: machine learning, coding, web programming, emulators
+# Debian/Ubuntu-oriented; keep this lean and reproducible.
+
+# Core CLI / shell
+bash-completion
+btop
+ca-certificates
+curl
+fastfetch
+fd-find
+ffmpeg
+file
+findutils
+fzf
+gh
+git
+gnupg
+grep
+gum
+htop
+jq
+less
+lsof
+man-db
+manpages
+nano
+openssh-client
+ripgrep
+stow
+tar
+traceroute
+tree
+unzip
+vim
+wget
+xz-utils
+zip
+zoxide
+zsh
+
+# Build / native development
+build-essential
+cmake
+pkg-config
+
+# Python / ML
+python3
+python3-dev
+python3-pip
+python3-venv
+
+# JavaScript / web dev helpers
+postgresql
+libpq-dev
+
+# Containers
+containerd.io
+docker-buildx-plugin
+docker-ce
+docker-ce-cli
+docker-compose-plugin
+
+# GPU / ML acceleration (keep only if this machine uses NVIDIA CUDA)
+cuda-toolkit-12-9
+cudnn9-cuda-12
+nvidia-driver
+
+# Editors / terminals
+alacritty
+code
+konsole
+
+# Browser / web testing
+firefox-esr
+
+# Desktop helpers / productivity
+dolphin
+dunst
+flameshot
+fontconfig
+redshift-gtk
+ulauncher
+xdg-utils
+
+# Database / API work
+pgadmin4
+
+# Emulator / gaming related
+steam-libs-amd64
+steam-libs-i386:i386
+
+# Firmware / hardware support (useful on bare-metal Linux, usually not needed in WSL)
+firmware-intel-graphics
+firmware-iwlwifi
+firmware-nvidia-graphics
+firmware-realtek
+firmware-sof-signed
+intel-microcode
+
+# Power / laptop
+tlp
+tlp-rdw
+
+# Nice-to-have extras
+7zip
+imagemagick
+poppler-utils
+usbutils
+pciutils

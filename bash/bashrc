@@ -70,11 +70,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias ls='ls --color=auto'
 fi
 
-# Alias definitions
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
 # enable programmable completion features
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
@@ -84,59 +79,31 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Homebrew (cross-platform)
-if [[ "$(uname -s)" == "Darwin" ]]; then
-  if [[ -x /opt/homebrew/bin/brew ]]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-  elif [[ -x /usr/local/bin/brew ]]; then
-    eval "$(/usr/local/bin/brew shellenv)"
-  fi
-elif [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# Shared shell setup
+if [ -f "$HOME/.bash_aliases" ]; then
+    . "$HOME/.bash_aliases"
 fi
 
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-# opencode
-export PATH=/home/solyviemiyu/.opencode/bin:$PATH
+if [ -f "$HOME/.config/shell/common.sh" ]; then
+    . "$HOME/.config/shell/common.sh"
+elif [ -f "$DOTFILES_DIR/shell/common.sh" ]; then
+    . "$DOTFILES_DIR/shell/common.sh"
+fi
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/solyviemiyu/Environment/miniforge3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/solyviemiyu/Environment/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/home/solyviemiyu/Environment/miniforge3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/solyviemiyu/Environment/miniforge3/bin:$PATH"
+if [ "$(uname -s)" = "Linux" ]; then
+    if [ -f "$HOME/.config/shell/linux.sh" ]; then
+        . "$HOME/.config/shell/linux.sh"
+    elif [ -f "$DOTFILES_DIR/shell/linux.sh" ]; then
+        . "$DOTFILES_DIR/shell/linux.sh"
+    fi
+elif [ "$(uname -s)" = "Darwin" ]; then # this is macOS hahaha funny name
+    if [ -f "$HOME/.config/shell/macos.sh" ]; then
+        . "$HOME/.config/shell/macos.sh"
+    elif [ -f "$DOTFILES_DIR/shell/macos.sh" ]; then
+        . "$DOTFILES_DIR/shell/macos.sh"
     fi
 fi
-unset __conda_setup
-# <<< conda initialize <<<
 
-
-# >>> mamba initialize >>>
-# !! Contents within this block are managed by 'mamba shell init' !!
-export MAMBA_EXE='/home/solyviemiyu/Environment/miniforge3/bin/mamba';
-export MAMBA_ROOT_PREFIX='/home/solyviemiyu/Environment/miniforge3';
-__mamba_setup="$("$MAMBA_EXE" shell hook --shell bash --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__mamba_setup"
-else
-    alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
-fi
-unset __mamba_setup
-# <<< mamba initialize <<<
-
-export PATH="/usr/sbin:$PATH"
-export PATH="/usr/bin:/usr/sbin:$PATH"
-
-# CUDA 12.9 (Linux-only, if installed)
-if [ "$(uname -s)" = "Linux" ] && [ -d "/usr/local/cuda-12.9/bin" ]; then
-  export PATH="/usr/local/cuda-12.9/bin:$PATH"
-  export LD_LIBRARY_PATH="/usr/local/cuda-12.9/lib64${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
-fi
+unset DOTFILES_DIR

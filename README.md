@@ -7,6 +7,9 @@ Minimal dotfiles setup with safe symlink installation for Linux and macOS.
 - `git/config` -> `~/.gitconfig`
 - `git/ignore` -> `~/.gitignore_global`
 - `shell/bash_aliases` -> `~/.bash_aliases`
+- `shell/common.sh` -> `~/.config/shell/common.sh`
+- `shell/linux.sh` -> `~/.config/shell/linux.sh`
+- `shell/macos.sh` -> `~/.config/shell/macos.sh`
 - `zsh/zshrc` -> `~/.zshrc`
 - `zsh/zprofile` -> `~/.zprofile`
 - `oh-my-posh/theme.omp.json` -> `~/.config/oh-my-posh/theme.omp.json`
@@ -22,17 +25,25 @@ Minimal dotfiles setup with safe symlink installation for Linux and macOS.
 ## Included now
 
 - oh-my-posh: local theme file (no remote theme dependency)
+- shell: shared cross-platform shell setup with Linux/macOS split
 - opencode: PATH integration in `shell/bash_aliases`
 - npm: basic npm config from your current setup
 - pi: settings, keybindings, custom prompts, and themes (auth/sessions are not managed)
+- local overrides: optional non-git shell overrides via `~/.config/shell/local.sh`
 
 ## Quick start
 
 From this directory, run:
 
 ```bash
-chmod +x install.sh
+chmod +x install.sh bootstrap.sh scripts/export-packages.sh
 ./install.sh
+```
+
+Or use the bootstrap flow:
+
+```bash
+./bootstrap.sh
 ```
 
 ## Safer first run
@@ -59,6 +70,28 @@ When a target file already exists, it is moved to:
 `~/.dotfiles-backups/YYYYMMDD-HHMMSS/`
 
 unless you use `--force`.
+
+## Package manifests
+
+This repo can export package manifests for reproducibility:
+
+```bash
+./scripts/export-packages.sh
+```
+
+Current supported exports (when available on the system):
+- `packages/apt-manual.txt`
+- `packages/flatpak-apps.txt`
+- `packages/pnpm-global.json`
+- `packages/npm-global.json`
+- `packages/pipx.json`
+- `packages/cargo-install-list.txt`
+
+Restore helpers:
+- `./scripts/install-packages-apt.sh`
+- `./scripts/install-packages-apt-curated.sh`
+- `./scripts/install-node-globals.sh`
+- see `packages/README.md` for notes and source categories
 
 ## Add more dotfiles
 
