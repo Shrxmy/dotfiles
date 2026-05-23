@@ -83,3 +83,11 @@ if [ "$(uname -s)" = "Linux" ] && [ -d "/usr/local/cuda-12.9/bin" ]; then
   export PATH="/usr/local/cuda-12.9/bin:$PATH"
   export LD_LIBRARY_PATH="/usr/local/cuda-12.9/lib64${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 fi
+
+# pnpm
+export PNPM_HOME="/home/solyviemiyu/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end

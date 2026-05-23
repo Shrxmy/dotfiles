@@ -1,0 +1,5 @@
+# pi local/private state
+pi/agent/auth.json
+pi/agent/sessions/
+pi/agent/skills/
+pi/agent/settings.json.bak-*

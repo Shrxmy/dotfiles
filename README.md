@@ -14,12 +14,17 @@ Minimal dotfiles setup with safe symlink installation for Linux and macOS.
 - `alacritty/alacritty.toml` -> `~/.config/alacritty/alacritty.toml`
 - `konsole/Solyvie.profile` -> `~/.local/share/konsole/Solyvie.profile` (Linux)
 - `konsole/Solyvie-Alacritty.colorscheme` -> `~/.local/share/konsole/Solyvie-Alacritty.colorscheme` (Linux)
+- `pi/agent/settings.json` -> `~/.pi/agent/settings.json`
+- `pi/agent/keybindings.json` -> `~/.pi/agent/keybindings.json`
+- `pi/agent/prompts/commit.md` -> `~/.pi/agent/prompts/commit.md`
+- `pi/agent/themes/*.json` -> `~/.pi/agent/themes/*.json`
 
 ## Included now
 
 - oh-my-posh: local theme file (no remote theme dependency)
 - opencode: PATH integration in `shell/bash_aliases`
 - npm: basic npm config from your current setup
+- pi: settings, keybindings, custom prompts, and themes (auth/sessions are not managed)
 
 ## Quick start
 

@@ -167,6 +167,14 @@ main() {
   # pgcli
   link_file "$DOTFILES_DIR/pgcli/config" "$HOME/.config/pgcli/config"
 
+  # pi coding agent (safe config only; auth/sessions are intentionally not managed)
+  link_file "$DOTFILES_DIR/pi/agent/settings.json" "$HOME/.pi/agent/settings.json"
+  link_file "$DOTFILES_DIR/pi/agent/keybindings.json" "$HOME/.pi/agent/keybindings.json"
+  link_file "$DOTFILES_DIR/pi/agent/prompts/commit.md" "$HOME/.pi/agent/prompts/commit.md"
+  link_file "$DOTFILES_DIR/pi/agent/themes/retro-clean.json" "$HOME/.pi/agent/themes/retro-clean.json"
+  link_file "$DOTFILES_DIR/pi/agent/themes/retro.json" "$HOME/.pi/agent/themes/retro.json"
+  link_file "$DOTFILES_DIR/pi/agent/themes/seafoam-ascii.json" "$HOME/.pi/agent/themes/seafoam-ascii.json"
+
   # GTK & fonts (Linux only)
   if [[ "$(uname -s)" == "Linux" ]]; then
     # Konsole (KDE terminal)
