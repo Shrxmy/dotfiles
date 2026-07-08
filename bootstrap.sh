@@ -14,6 +14,7 @@ Options:
 What it does:
   1. Exports package manifests for the current system
   2. Installs/symlinks dotfiles via install.sh
+  3. Installs zsh plugins (fzf, autosuggestions, history-substring-search)
 
 Note: package installation is intentionally not automated yet.
 EOF
@@ -33,6 +34,8 @@ bash "$ROOT_DIR/scripts/export-packages.sh"
 
 if [[ "$DRY_RUN" == true ]]; then
   bash "$ROOT_DIR/install.sh" --dry-run
+  bash "$ROOT_DIR/scripts/install-zsh-plugins.sh"
 else
   bash "$ROOT_DIR/install.sh"
+  bash "$ROOT_DIR/scripts/install-zsh-plugins.sh"
 fi

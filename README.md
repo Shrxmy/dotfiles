@@ -31,16 +31,30 @@ Minimal dotfiles setup with safe symlink installation for Linux and macOS.
 - pi: settings, keybindings, custom prompts, and themes (auth/sessions are not managed)
 - local overrides: optional non-git shell overrides via `~/.config/shell/local.sh`
 
+## Zsh plugins
+
+The bootstrap automatically installs these zsh plugins:
+
+- [fzf](https://github.com/junegunn/fzf) - fuzzy finder (Ctrl+R for history, Ctrl+T for files)
+- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) - autosuggestions from history
+- [zsh-history-substring-search](https://github.com/zsh-users/zsh-history-substring-search) - arrow key history search
+
+Plugins are installed to `~/.fzf` and `~/.zsh/`. To reinstall manually:
+
+```bash
+./scripts/install-zsh-plugins.sh
+```
+
 ## Quick start
 
 From this directory, run:
 
 ```bash
-chmod +x install.sh bootstrap.sh scripts/export-packages.sh
+chmod +x install.sh bootstrap.sh scripts/install-zsh-plugins.sh
 ./install.sh
 ```
 
-Or use the bootstrap flow:
+Or use the bootstrap flow (installs dotfiles + zsh plugins):
 
 ```bash
 ./bootstrap.sh
