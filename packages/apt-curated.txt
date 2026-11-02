@@ -61,10 +61,9 @@ docker-ce
 docker-ce-cli
 docker-compose-plugin
 
-# GPU / ML acceleration (keep only if this machine uses NVIDIA CUDA)
-cuda-toolkit-12-9
-cudnn9-cuda-12
+# NVIDIA GPU driver (PyTorch/TensorFlow wheels bundle their own CUDA)
 nvidia-driver
+nvidia-driver-cuda
 
 # Editors / terminals
 alacritty

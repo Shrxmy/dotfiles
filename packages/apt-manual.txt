@@ -29,11 +29,8 @@ coreutils
 cpio
 cron
 cron-daemon-common
-cuda-toolkit-12-9
-cudnn9-cuda-12
 cups
 curl
-cursor-sandbox-apparmor
 dash
 dbus
 debconf
@@ -287,6 +284,7 @@ netcat-traditional
 nftables
 ntfs-3g
 nvidia-driver
+nvidia-driver-cuda
 openssh-client
 openssl-provider-legacy
 orca
