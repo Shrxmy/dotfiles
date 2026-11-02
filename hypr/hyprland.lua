@@ -91,6 +91,7 @@ hl.config({
         force_default_wallpaper = 0,
         disable_hyprland_logo   = true,
         disable_splash_rendering = true,
+        on_focus_under_fullscreen = 1, -- focusing another window makes it take over the maximized spot
         background_color = 0xff25222a,
     },
 })
@@ -123,6 +124,7 @@ hl.bind(mod .. " + W",      hl.dsp.exec_cmd("~/.config/hypr/wallpaper.sh"))
 hl.bind(mod .. " + slash",  hl.dsp.exec_cmd("fuzzel --dmenu --width 82 --lines 24 --prompt 'cheat sheet ❯ ' < ~/.config/hypr/cheatsheet.txt"))
 hl.bind(mod .. " + Q",      hl.dsp.window.close())
 hl.bind(mod .. " + F",      hl.dsp.window.fullscreen())
+hl.bind(mod .. " + M",      hl.dsp.window.fullscreen({ mode = "maximized" }))
 hl.bind(mod .. " + V",      hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mod .. " + P",      hl.dsp.window.pseudo())
 hl.bind(mod .. " + J",      hl.dsp.layout("togglesplit"))
@@ -138,6 +140,16 @@ for i = 1, 10 do
     hl.bind(mod .. " + " .. key,         hl.dsp.focus({ workspace = i }))
     hl.bind(mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
+
+-- Alt+Tab: cycle windows and raise the chosen one
+hl.bind("ALT + Tab", function()
+    hl.dispatch(hl.dsp.window.cycle_next())
+    hl.dispatch(hl.dsp.window.bring_to_top())
+end)
+hl.bind("ALT + SHIFT + Tab", function()
+    hl.dispatch(hl.dsp.window.cycle_next({ next = false }))
+    hl.dispatch(hl.dsp.window.bring_to_top())
+end)
 
 -- scratchpad
 hl.bind(mod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
@@ -186,4 +198,9 @@ hl.window_rule({
     name  = "terminal-glass", -- let the blurred wallpaper show through terminals
     match = { class = "^(Alacritty|org.kde.konsole)$" },
     opacity = "0.88 0.80",
+})
+hl.window_rule({
+    name  = "browser-maximized", -- fill the screen, keep bar and gaps (not true fullscreen)
+    match = { class = "^(brave-origin|brave-browser)$" },
+    maximize = true,
 })

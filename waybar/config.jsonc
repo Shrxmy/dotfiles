@@ -11,6 +11,8 @@
   ],
   "modules-center": [],
   "modules-right": [
+    "custom/cpucat",
+    "custom/sep",
     "pulseaudio",
     "custom/sep",
     "cpu",
@@ -23,7 +25,8 @@
     "custom/sep",
     "clock",
     "custom/sep",
-    "tray"
+    "tray",
+    "custom/settings"
   ],
   "custom/tag": {
     "format": " /solyvie",
@@ -31,17 +34,27 @@
   },
   "hyprland/workspaces": {
     "format": "{name}",
-    "persistent-workspaces": {
-      "*": 9
-    },
-    "on-scroll-up": "hyprctl dispatch workspace e-1",
-    "on-scroll-down": "hyprctl dispatch workspace e+1"
+    "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'",
+    "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'"
   },
   "mpris": {
-    "format": " {artist} - {title}",
-    "format-paused": " {artist} - {title}",
-    "max-length": 45,
-    "player": "spotify"
+    "format": "{player_icon} {dynamic}",
+    "format-paused": "{status_icon} {dynamic}",
+    "dynamic-order": [
+      "title",
+      "artist"
+    ],
+    "dynamic-len": 42,
+    "player-icons": {
+      "default": "",
+      "spotify": "",
+      "brave": "",
+      "firefox": ""
+    },
+    "status-icons": {
+      "paused": ""
+    },
+    "tooltip-format": "{player}: {title} · {artist}"
   },
   "pulseaudio": {
     "format": "Vol: {volume}%",
@@ -91,5 +104,16 @@
     "format": "|",
     "interval": "once",
     "tooltip": false
+  },
+  "custom/cpucat": {
+    "exec": "~/.config/waybar/cpucat.sh",
+    "return-type": "json",
+    "format": "{}"
+  },
+  "custom/settings": {
+    "format": "",
+    "tooltip-format": "System Settings",
+    "on-click": "systemsettings",
+    "on-click-right": "pavucontrol"
   }
 }

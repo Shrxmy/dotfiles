@@ -173,6 +173,15 @@ main() {
     link_file "$DOTFILES_DIR/waybar/config.jsonc" "$HOME/.config/waybar/config.jsonc"
     link_file "$DOTFILES_DIR/waybar/style.css" "$HOME/.config/waybar/style.css"
     link_file "$DOTFILES_DIR/fuzzel/fuzzel.ini" "$HOME/.config/fuzzel/fuzzel.ini"
+    link_file "$DOTFILES_DIR/waybar/cpucat.sh" "$HOME/.config/waybar/cpucat.sh"
+
+    # Waycat font for the animated bar cat: fetched from upstream (no license to redistribute it here)
+    if [[ ! -f "$HOME/.local/share/fonts/Waycat.ttf" ]]; then
+      run_cmd mkdir -p "$HOME/.local/share/fonts"
+      run_cmd curl -fsSL -o "$HOME/.local/share/fonts/Waycat.ttf" \
+        https://raw.githubusercontent.com/CarloCattano/waycat/main/fonts/Waycat.ttf
+      run_cmd fc-cache -f "$HOME/.local/share/fonts"
+    fi
   fi
 
   # htop

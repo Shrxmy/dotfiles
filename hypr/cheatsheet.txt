@@ -8,6 +8,9 @@ Super + E                  files (Dolphin)
 Super + W                  wallpaper picker
 ── WINDOWS ───────────────────────────────────────────────────────────────────
 Super + Q                  close window
+Alt + Tab                  next window (brings it to the front)
+Alt + Shift + Tab          previous window
+Super + M                  maximize on/off (fills screen, keeps bar)
 Super + F                  fullscreen on/off
 Super + V                  float / tile window
 Super + J                  split side-by-side / stacked
@@ -18,7 +21,7 @@ Super + left-drag          move window with mouse
 Super + right-drag         resize window with mouse
 (no minimize)              use the scratchpad or another workspace instead
 ── WORKSPACES ────────────────────────────────────────────────────────────────
-Super + 1…9, 0             go to workspace 1–10
+Super + 1…9, 0             go to workspace 1–10 (created on demand; bar shows only used ones)
 Super + Shift + 1…9, 0     send window to workspace 1–10
 Super + scroll             next / previous workspace
 3-finger swipe             next / previous workspace (touchpad)
@@ -39,6 +42,9 @@ scroll on bar              switch workspace
 click  Vol                 open audio mixer      · right-click: mute
 click  clock               time ↔ date           · hover: calendar
 tray icons                 Wi-Fi, Bluetooth menus
+gear (far right)           System Settings  · right-click: audio mixer
+music (left side)          shows what is playing · click: play/pause · right-click: next
+running cat                runs faster with CPU load, naps when idle · hover: CPU %
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  TERMINAL  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ls · ll · la · lt          list files · detailed · + hidden · tree
 fastfetch                  system info with Kirby
