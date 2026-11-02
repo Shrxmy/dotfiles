@@ -84,3 +84,11 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+# >>> micromamba >>>
+if [ -x "$HOME/Environment/miniforge3/micromamba" ]; then
+  export MAMBA_EXE="$HOME/Environment/miniforge3/micromamba"
+  export MAMBA_ROOT_PREFIX="$HOME/Environment/miniforge3"
+  eval "$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2>/dev/null)"
+fi
+# <<< micromamba <<<
