@@ -108,3 +108,21 @@ imagemagick
 poppler-utils
 usbutils
 pciutils
+
+# Hyprland session (hypr* packages come from trixie-backports)
+hyprland
+xdg-desktop-portal-hyprland
+swaybg
+hyprlock
+hypridle
+hyprpolkitagent
+hyprland-guiutils
+waybar
+fuzzel
+slurp
+wl-clipboard
+brightnessctl
+playerctl
+pavucontrol
+network-manager-applet
+blueman

@@ -1,0 +1,64 @@
+━━━━━━━━━━━━━━━━  KEYS · Super = Windows key · type to search  ━━━━━━━━━━━━━━━━
+Super + /                  this cheat sheet
+── APPS ──────────────────────────────────────────────────────────────────────
+Super + Enter              terminal (Alacritty)
+Super + Space              app launcher (type, Enter to open, Esc to close)
+Super + B                  browser (Brave)
+Super + E                  files (Dolphin)
+Super + W                  wallpaper picker
+── WINDOWS ───────────────────────────────────────────────────────────────────
+Super + Q                  close window
+Super + F                  fullscreen on/off
+Super + V                  float / tile window
+Super + J                  split side-by-side / stacked
+Super + P                  pseudo-tile (keep the app's own size)
+Super + arrows             focus window left / right / up / down
+Super + Shift + arrows     move window left / right / up / down
+Super + left-drag          move window with mouse
+Super + right-drag         resize window with mouse
+(no minimize)              use the scratchpad or another workspace instead
+── WORKSPACES ────────────────────────────────────────────────────────────────
+Super + 1…9, 0             go to workspace 1–10
+Super + Shift + 1…9, 0     send window to workspace 1–10
+Super + scroll             next / previous workspace
+3-finger swipe             next / previous workspace (touchpad)
+Super + S                  show / hide scratchpad ("minimize" spot)
+Super + Shift + S          send window to scratchpad
+── SYSTEM ────────────────────────────────────────────────────────────────────
+Super + L                  lock screen
+Super + Shift + E          log out (back to login screen / Plasma)
+Print                      screenshot region → ~/Pictures/Screenshots + clipboard
+Shift + Print              screenshot whole screen
+volume / mute / mic keys   work everywhere, even on the lock screen
+brightness keys            screen brightness
+play / next / prev keys    media control (Spotify, browser)
+idle                       dims at 4 min · locks at 5 · screen off at 6
+── BAR (Waybar) ──────────────────────────────────────────────────────────────
+click workspace number     switch workspace
+scroll on bar              switch workspace
+click  Vol                 open audio mixer      · right-click: mute
+click  clock               time ↔ date           · hover: calendar
+tray icons                 Wi-Fi, Bluetooth menus
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  TERMINAL  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ls · ll · la · lt          list files · detailed · + hidden · tree
+fastfetch                  system info with Kirby
+→ (right arrow)            accept gray autosuggestion
+↑ / ↓ after typing         search history for what you typed
+Tab                        complete commands / paths
+micromamba activate ml     ML env (Python + PyTorch + Jupyter)
+jupyter lab                start Jupyter (inside the ml env)
+micromamba deactivate      leave the env
+nvidia-smi                 GPU status
+nmcli device wifi list     nearby Wi-Fi networks
+nmcli device wifi connect "Name" --ask     join Wi-Fi (works in Hyprland + Plasma)
+pkill waybar; waybar & disown              restart the bar
+hyprctl reload                             reload Hyprland config
+Hyprland --verify-config                   check the config for errors
+── CONFIG FILES (~/Documents/dotfiles) ───────────────────────────────────────
+hypr/hyprland.lua          keybinds, look, autostart
+hypr/hyprlock.conf         lock screen
+hypr/hypridle.conf         idle timers
+waybar/config.jsonc        bar modules     · waybar/style.css  bar colors
+fuzzel/fuzzel.ini          launcher look
+eza/theme.yml              ls colors / icons
+fastfetch/make-kirby.py    redraw Kirby → python3 make-kirby.py > kirby.txt

@@ -1,0 +1,95 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 26,
+  "spacing": 0,
+  "modules-left": [
+    "custom/tag",
+    "hyprland/workspaces",
+    "custom/sep",
+    "mpris"
+  ],
+  "modules-center": [],
+  "modules-right": [
+    "pulseaudio",
+    "custom/sep",
+    "cpu",
+    "custom/sep",
+    "memory",
+    "custom/sep",
+    "disk",
+    "custom/sep",
+    "battery",
+    "custom/sep",
+    "clock",
+    "custom/sep",
+    "tray"
+  ],
+  "custom/tag": {
+    "format": " /solyvie",
+    "tooltip": false
+  },
+  "hyprland/workspaces": {
+    "format": "{name}",
+    "persistent-workspaces": {
+      "*": 9
+    },
+    "on-scroll-up": "hyprctl dispatch workspace e-1",
+    "on-scroll-down": "hyprctl dispatch workspace e+1"
+  },
+  "mpris": {
+    "format": " {artist} - {title}",
+    "format-paused": " {artist} - {title}",
+    "max-length": 45,
+    "player": "spotify"
+  },
+  "pulseaudio": {
+    "format": "Vol: {volume}%",
+    "format-muted": "Muted",
+    "on-click": "pavucontrol",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+  },
+  "cpu": {
+    "format": "CPU: {usage}%",
+    "interval": 2,
+    "tooltip": false
+  },
+  "memory": {
+    "format": "Ram: {used:0.1f}GiB",
+    "interval": 5
+  },
+  "disk": {
+    "format": "Disk: {free}",
+    "path": "/",
+    "interval": 60
+  },
+  "battery": {
+    "states": {
+      "warning": 25,
+      "critical": 12
+    },
+    "format": "Bat: {capacity}%",
+    "format-charging": "Bat: {capacity}% 󰂄",
+    "format-plugged": "Bat: {capacity}% ",
+    "tooltip-format": "{timeTo}"
+  },
+  "clock": {
+    "format": "{:%H:%M}",
+    "format-alt": "{:%a %d %b %Y}",
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "calendar": {
+      "format": {
+        "today": "<span color='#cc9166'><b>{}</b></span>"
+      }
+    }
+  },
+  "tray": {
+    "spacing": 10,
+    "icon-size": 15
+  },
+  "custom/sep": {
+    "format": "|",
+    "interval": "once",
+    "tooltip": false
+  }
+}
