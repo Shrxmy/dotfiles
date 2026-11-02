@@ -67,6 +67,7 @@ nvidia-driver-cuda
 
 # Editors / terminals
 alacritty
+eza
 code
 konsole
 

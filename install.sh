@@ -147,6 +147,9 @@ main() {
   # oh-my-posh
   link_file "$DOTFILES_DIR/oh-my-posh/theme.omp.json" "$HOME/.config/oh-my-posh/theme.omp.json"
 
+  # eza (ls with icons)
+  link_file "$DOTFILES_DIR/eza/theme.yml" "$HOME/.config/eza/theme.yml"
+
   # npm
   link_file "$DOTFILES_DIR/npm/npmrc" "$HOME/.npmrc"
 
