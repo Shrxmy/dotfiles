@@ -44,6 +44,7 @@ path_prepend "$PNPM_HOME/bin"
 # Prefer user-local bins early
 path_prepend "$HOME/bin"
 path_prepend "$HOME/.local/bin"
+path_prepend "$HOME/Environment/aws-cli/dist"
 
 # Deduplicate PATH after shared setup mutations
 path_dedupe
