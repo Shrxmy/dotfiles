@@ -1,114 +1,30 @@
-# Dotfiles
+# dotfiles
 
-Minimal dotfiles setup with safe symlink installation for Linux and macOS.
+my setup for debian (also works on mac, or "darwin" as it likes to call itself). everything's themed in a warm retro palette i call **retro clean**.
 
-## What this manages
+## what's in here
 
-- `git/config` -> `~/.gitconfig`
-- `git/ignore` -> `~/.gitignore_global`
-- `shell/bash_aliases` -> `~/.bash_aliases`
-- `shell/common.sh` -> `~/.config/shell/common.sh`
-- `shell/linux.sh` -> `~/.config/shell/linux.sh`
-- `shell/macos.sh` -> `~/.config/shell/macos.sh`
-- `zsh/zshrc` -> `~/.zshrc`
-- `zsh/zprofile` -> `~/.zprofile`
-- `oh-my-posh/theme.omp.json` -> `~/.config/oh-my-posh/theme.omp.json`
-- `npm/npmrc` -> `~/.npmrc`
-- `alacritty/alacritty.toml` -> `~/.config/alacritty/alacritty.toml`
-- `konsole/Solyvie.profile` -> `~/.local/share/konsole/Solyvie.profile` (Linux)
-- `konsole/Solyvie-Alacritty.colorscheme` -> `~/.local/share/konsole/Solyvie-Alacritty.colorscheme` (Linux)
-- `pi/agent/settings.json` -> `~/.pi/agent/settings.json`
-- `pi/agent/keybindings.json` -> `~/.pi/agent/keybindings.json`
-- `pi/agent/prompts/commit.md` -> `~/.pi/agent/prompts/commit.md`
-- `pi/agent/themes/*.json` -> `~/.pi/agent/themes/*.json`
+- **hyprland**: flat, sharp tiling setup with waybar, fuzzel, hyprlock, a wallpaper picker (`super + w`) and a cheat sheet (`super + /`) for when i forget my own keybinds
+- **shell**: zsh + oh-my-posh, autosuggestions, `ls` with colored icons (eza), micromamba
+- **terminal**: alacritty / konsole, fastfetch with a pixel kirby
+- **pi**: my pi agent settings, prompts and themes
+- plus git, npm, dunst, gtk, htop, gh and pgcli configs
 
-## Included now
-
-- oh-my-posh: local theme file (no remote theme dependency)
-- shell: shared cross-platform shell setup with Linux/macOS split
-- opencode: PATH integration in `shell/bash_aliases`
-- npm: basic npm config from your current setup
-- pi: settings, keybindings, custom prompts, and themes (auth/sessions are not managed)
-- local overrides: optional non-git shell overrides via `~/.config/shell/local.sh`
-
-## Zsh plugins
-
-The bootstrap automatically installs these zsh plugins:
-
-- [fzf](https://github.com/junegunn/fzf) - fuzzy finder (Ctrl+R for history, Ctrl+T for files)
-- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) - autosuggestions from history
-- [zsh-history-substring-search](https://github.com/zsh-users/zsh-history-substring-search) - arrow key history search
-
-Plugins are installed to `~/.fzf` and `~/.zsh/`. To reinstall manually:
+## install
 
 ```bash
-./scripts/install-zsh-plugins.sh
+./install.sh --dry-run   # see what it'll do first
+./bootstrap.sh           # dotfiles + zsh plugins
 ```
 
-## Quick start
+anything already there gets backed up to `~/.dotfiles-backups/` instead of overwritten (unless you pass `--force`).
 
-From this directory, run:
+packages i actually use are in `packages/apt-curated.txt`, so run `./scripts/install-packages-apt-curated.sh` for those. the hyprland stuff comes from trixie-backports.
 
-```bash
-chmod +x install.sh bootstrap.sh scripts/install-zsh-plugins.sh
-./install.sh
-```
+## adding stuff
 
-Or use the bootstrap flow (installs dotfiles + zsh plugins):
+drop the file in here, add a `link_file` line to `install.sh`, run it.
 
-```bash
-./bootstrap.sh
-```
+## credits
 
-## Safer first run
-
-Preview all actions without changing anything:
-
-```bash
-./install.sh --dry-run
-```
-
-## Options
-
-```bash
-./install.sh --help
-```
-
-- `--dry-run`: print actions only
-- `--force`: overwrite existing files instead of backing them up
-
-## Backups
-
-When a target file already exists, it is moved to:
-
-`~/.dotfiles-backups/YYYYMMDD-HHMMSS/`
-
-unless you use `--force`.
-
-## Package manifests
-
-This repo can export package manifests for reproducibility:
-
-```bash
-./scripts/export-packages.sh
-```
-
-Current supported exports (when available on the system):
-- `packages/apt-manual.txt`
-- `packages/flatpak-apps.txt`
-- `packages/pnpm-global.json`
-- `packages/npm-global.json`
-- `packages/pipx.json`
-- `packages/cargo-install-list.txt`
-
-Restore helpers:
-- `./scripts/install-packages-apt.sh`
-- `./scripts/install-packages-apt-curated.sh`
-- `./scripts/install-node-globals.sh`
-- see `packages/README.md` for notes and source categories
-
-## Add more dotfiles
-
-1. Add a file/folder in this repository.
-2. Add a `link_file "source" "target"` line in `install.sh`.
-3. Run `./install.sh --dry-run` and then `./install.sh`.
+the little cat in the bar uses the font from [waycat](https://github.com/CarloCattano/waycat). it's downloaded on install, not included here.
