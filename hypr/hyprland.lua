@@ -204,3 +204,8 @@ hl.window_rule({
     match = { class = "^(brave-origin|brave-browser)$" },
     maximize = true,
 })
+hl.window_rule({
+    name  = "chromium-touchpad-scroll", -- Chromium/Electron apps over-scroll on touchpads; tame them to a Windows-like pace
+    match = { class = "^(brave-origin|brave-browser|chromium|[Cc]ode|discord|[Ss]potify)$" },
+    scroll_touchpad = 0.35,
+})
