@@ -21,7 +21,7 @@ if [ -z "${AQ_DRM_DEVICES:-}" ] && [ -e /dev/dri/by-path/pci-0000:00:02.0-card ]
     export AQ_DRM_DEVICES="$(readlink -f /dev/dri/by-path/pci-0000:00:02.0-card)"
     # Also keep every app's GL/EGL/Vulkan off the NVIDIA driver: its libraries hold the GPU open inside
     # each process (Hyprland, Xwayland, browsers...), which the GPU being pulled takes down with it.
-    # Run something on the NVIDIA GPU on purpose with `nvrun <app>` (shell/common.sh).
+    # CUDA (PyTorch etc.) talks to the driver directly, so ML still gets the GPU whenever it's present.
     [ -f /usr/share/glvnd/egl_vendor.d/50_mesa.json ] && export __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json
     export __GLX_VENDOR_LIBRARY_NAME=mesa
     export VK_LOADER_DRIVERS_DISABLE='*nvidia*'
