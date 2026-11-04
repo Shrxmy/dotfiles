@@ -208,6 +208,11 @@ hl.window_rule({
     opacity = "0.88 0.80",
 })
 hl.window_rule({
+    name  = "spotify-glass", -- same blurred-wallpaper look, a bit more solid so album art stays readable
+    match = { class = "^(Spotify|spotify)$" },
+    opacity = "0.92 0.85",
+})
+hl.window_rule({
     name  = "browser-maximized", -- fill the screen, keep bar and gaps (not true fullscreen)
     match = { class = "^(brave-origin|brave-browser)$" },
     maximize = true,
