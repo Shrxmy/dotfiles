@@ -24,4 +24,7 @@ udevadm monitor --udev --subsystem-match=power_supply 2>/dev/null | while read -
   hyprctl reload >/dev/null 2>&1
   # only on the transition, so a level set by hand in between sticks
   if [ "$now" = 1 ]; then brightnessctl -q set 50%; else brightnessctl -q set 30%; fi
+  # optional looks hook (u-da-real-ricing: keyboard light), given "ac" or "battery"
+  hook="$HOME/.config/hypr/power-hook.sh"
+  [ -x "$hook" ] && { "$hook" "$([ "$now" = 1 ] && echo ac || echo battery)" >/dev/null 2>&1 || true; }
 done
