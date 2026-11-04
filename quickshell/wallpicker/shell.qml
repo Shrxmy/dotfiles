@@ -51,6 +51,7 @@ ShellRoot {
                 spacing: 12
                 model: root.files
                 interactive: false // wheel is handled below, one wallpaper per notch
+                keyNavigationEnabled: true // defaults to `interactive`, which would kill the arrow keys
                 clip: true
                 keyNavigationWraps: true
                 highlightRangeMode: ListView.StrictlyEnforceRange
