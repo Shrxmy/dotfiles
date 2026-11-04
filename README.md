@@ -21,6 +21,17 @@ anything already there gets backed up to `~/.dotfiles-backups/` instead of overw
 
 packages i actually use are in `packages/apt-curated.txt`, so run `./scripts/install-packages-apt-curated.sh` for those. the hyprland stuff comes from trixie-backports.
 
+## battery (lenovo loq)
+
+`tlp/50-battery.conf` turns off turbo on battery, lets the nvidia gpu sleep, starts bluetooth off and keeps the battery at ~60% while plugged in (`sudo tlp fullcharge` for a one-off 100%). it's system-wide, so it's installed by hand:
+
+```bash
+sudo install -m 644 tlp/50-battery.conf /etc/tlp.d/ && sudo tlp start
+sudo systemctl disable --now nvidia-persistenced   # keeps the gpu awake otherwise
+```
+
+unplugging also drops the screen to 60 hz (and the ricing repo turns off blur and animations). `hypr/powerwatch.sh` reloads hyprland when the charger changes.
+
 ## adding stuff
 
 drop the file in here, add a `link_file` line to `install.sh`, run it.

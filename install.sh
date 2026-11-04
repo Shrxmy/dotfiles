@@ -154,6 +154,7 @@ main() {
     # Hyprland core (looks: install u-da-real-ricing, which adds hypr/look.lua)
     link_file "$DOTFILES_DIR/hypr/hyprland.lua" "$HOME/.config/hypr/hyprland.lua"
     link_file "$DOTFILES_DIR/hypr/hypridle.conf" "$HOME/.config/hypr/hypridle.conf"
+    link_file "$DOTFILES_DIR/hypr/powerwatch.sh" "$HOME/.config/hypr/powerwatch.sh"
     link_file "$DOTFILES_DIR/hypr/cheatsheet.txt" "$HOME/.config/hypr/cheatsheet.txt"
   fi
 

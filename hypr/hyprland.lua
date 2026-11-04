@@ -2,8 +2,24 @@
 -- Looks (borders, blur, animations, wallpaper, glass) come from u-da-real-ricing's look.lua when it's installed;
 -- without it this is a plain, fully working Hyprland.
 
+---- POWER ----
+-- Read once per config load; hypr/powerwatch.sh reloads Hyprland when the charger is plugged or unplugged.
+local function on_ac()
+    for _, name in ipairs({ "ACAD", "AC", "ADP1", "AC0" }) do
+        local f = io.open("/sys/class/power_supply/" .. name .. "/online")
+        if f then
+            local v = f:read("l")
+            f:close()
+            return v == "1"
+        end
+    end
+    return true -- no charger info: treat as plugged in
+end
+ON_BATTERY = not on_ac() -- global on purpose: look.lua (u-da-real-ricing) drops blur/animations on battery
+
 ---- MONITORS ----
-hl.monitor({ output = "eDP-1", mode = "1920x1080@144", position = "0x0", scale = "1" })
+-- 60 Hz on battery saves ~1-2 W on this panel; 144 Hz when plugged in
+hl.monitor({ output = "eDP-1", mode = ON_BATTERY and "1920x1080@60" or "1920x1080@144", position = "0x0", scale = "1" })
 hl.monitor({ output = "", mode = "preferred", position = "auto", scale = "1" }) -- external displays
 
 ---- PROGRAMS ----
@@ -20,6 +36,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("waybar")
     hl.exec_cmd("dunst")
     hl.exec_cmd("hypridle")
+    hl.exec_cmd("~/.config/hypr/powerwatch.sh") -- reload on charger plug/unplug
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
     hl.exec_cmd("nm-applet --indicator")
     hl.exec_cmd("blueman-applet")
