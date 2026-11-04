@@ -58,8 +58,9 @@ case "${1:-}" in
     [ -f "$img" ] || { img=$default; save "$img"; }
     apply "$img"
     read -r accent sand 2>/dev/null <"$state/accent" || { accent=cc9166; sand=d9ac8c; }
-    write_accent "$accent" "$sand" # always: Fuzzel won't start if its include is missing
-    push_accent "$accent" "$sand"
+    # always: Fuzzel won't start if its include is missing. No push_accent: at login Waybar is
+    # still starting and SIGUSR2 before its handler is installed kills it; apps read the files at start.
+    write_accent "$accent" "$sand"
     ;;
   "")
     mapfile -t files < <(find "$dir" -maxdepth 1 -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) | sort)
