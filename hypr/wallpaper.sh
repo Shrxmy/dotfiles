@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Wallpaper picker for Hyprland, with accent colors taken from the wallpaper.
-#   wallpaper.sh           fullscreen preview (imv): arrows browse, Enter applies, Esc/q cancels
+#   wallpaper.sh           carousel picker (Quickshell): arrows/wheel browse, Enter applies, Esc closes
 #   wallpaper.sh set FILE  apply FILE and recolor the accents
 #   wallpaper.sh restore   start the wallpaper process with the saved wallpaper and accents (run at login)
 set -euo pipefail
@@ -84,12 +84,19 @@ case "${1:-}" in
   "")
     mapfile -t files < <(find "$dir" -maxdepth 1 -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) | sort)
     [ "${#files[@]}" -gt 0 ] || exit 0
-    start=$(readlink -f "$current" 2>/dev/null || echo "${files[0]}")
-    # Binds only for this launch; no ';' inside a bind (imv would run it as a separate command).
-    exec imv-wayland -f -n "$start" \
-      -c 'bind <Escape> quit' \
-      -c "bind <Return> exec '$here/wallpaper.sh' set \"\$imv_current_file\" && imv-msg \"\$imv_pid\" quit" \
-      "${files[@]}"
+    # Small cached thumbnails so the picker never decodes full-size images; rebuilt only when stale.
+    thumbs="${XDG_CACHE_HOME:-$HOME/.cache}/wallpaper-thumbs"
+    mkdir -p "$thumbs"
+    for f in "${files[@]}"; do
+      t="$thumbs/$(basename "$f").jpg"
+      [ "$t" -nt "$f" ] || magick -define jpeg:size=960x540 "$f[0]" -thumbnail 480x270^ \
+        -gravity center -extent 480x270 -quality 85 "$t" || true
+    done
+    read -r accent _ 2>/dev/null <"$state/accent" || accent=cc9166
+    WALLPICKER_FILES=$(printf '%s\n' "${files[@]}") \
+      WALLPICKER_CURRENT=$(readlink -f "$current" 2>/dev/null || true) \
+      WALLPICKER_THUMBS=$thumbs WALLPICKER_ACCENT=$accent WALLPICKER_SET="$here/wallpaper.sh" \
+      exec qs -c wallpicker -n # -n: Super+W while open doesn't stack a second picker
     ;;
   *)
     echo "usage: wallpaper.sh [set FILE | restore]" >&2

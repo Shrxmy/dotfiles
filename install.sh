@@ -171,6 +171,7 @@ main() {
     link_file "$DOTFILES_DIR/hypr/wallpaper.sh" "$HOME/.config/hypr/wallpaper.sh"
     link_file "$DOTFILES_DIR/hypr/accent.py" "$HOME/.config/hypr/accent.py"
     link_file "$DOTFILES_DIR/quickshell/wallpaper" "$HOME/.config/quickshell/wallpaper"
+    link_file "$DOTFILES_DIR/quickshell/wallpicker" "$HOME/.config/quickshell/wallpicker"
     link_file "$DOTFILES_DIR/hypr/cheatsheet.txt" "$HOME/.config/hypr/cheatsheet.txt"
     link_file "$DOTFILES_DIR/waybar/config.jsonc" "$HOME/.config/waybar/config.jsonc"
     link_file "$DOTFILES_DIR/waybar/style.css" "$HOME/.config/waybar/style.css"

@@ -113,7 +113,6 @@ pciutils
 hyprland
 xdg-desktop-portal-hyprland
 quickshell
-imv
 hyprlock
 hypridle
 hyprpolkitagent
