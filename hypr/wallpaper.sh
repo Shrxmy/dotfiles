@@ -13,12 +13,16 @@ here="$(dirname "$(readlink -f "$0")")"
 
 # Resident Quickshell wallpaper (quickshell/wallpaper) draws and animates the change.
 # Mesa EGL keeps the NVIDIA GPU asleep; jemalloc decay returns freed memory (measured ~100 -> ~69 MB).
-start_wallpaper() {
+lean_qs() { # qs ARGS... on the Intel GPU with lean memory settings
   local mesa=/usr/share/glvnd/egl_vendor.d/50_mesa.json
   [ -f "$mesa" ] || mesa=""
   env ${mesa:+__EGL_VENDOR_LIBRARY_FILENAMES=$mesa} \
     MALLOC_CONF=narenas:1,tcache:false,dirty_decay_ms:0,muzzy_decay_ms:0,background_thread:false \
-    qs -c wallpaper -n -d >/dev/null 2>&1 9>&- || true # -n: no-op if already running
+    qs "$@"
+}
+
+start_wallpaper() {
+  lean_qs -c wallpaper -n -d >/dev/null 2>&1 9>&- || true # -n: no-op if already running
 }
 
 apply() {
@@ -96,7 +100,7 @@ case "${1:-}" in
     WALLPICKER_FILES=$(printf '%s\n' "${files[@]}") \
       WALLPICKER_CURRENT=$(readlink -f "$current" 2>/dev/null || true) \
       WALLPICKER_THUMBS=$thumbs WALLPICKER_ACCENT=$accent WALLPICKER_SET="$here/wallpaper.sh" \
-      exec qs -c wallpicker -n # -n: Super+W while open doesn't stack a second picker
+      lean_qs -c wallpicker -n # -n: Super+W while open doesn't stack a second picker
     ;;
   *)
     echo "usage: wallpaper.sh [set FILE | restore]" >&2
