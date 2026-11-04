@@ -41,7 +41,7 @@ click workspace number     switch workspace
 scroll on bar              switch workspace
 click  Vol                 open audio mixer      · right-click: mute
 click  clock               time ↔ date           · hover: calendar
-tray icons                 Wi-Fi, Bluetooth menus
+tray icons                 Wi-Fi menu · Bluetooth: open "Bluetooth Manager" from the launcher
 gear (far right)           System Settings  · right-click: audio mixer
 music (left side)          shows what is playing · click: play/pause · right-click: next
 running cat                runs faster with CPU load, naps when idle · hover: CPU %

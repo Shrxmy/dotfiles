@@ -43,7 +43,6 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("~/.config/hypr/powerwatch.sh") -- reload on charger plug/unplug
     hl.exec_cmd("systemctl --user unset-environment " .. gpu_env .. "; systemctl --user import-environment " .. gpu_env .. "; systemctl --user start hyprpolkitagent")
     hl.exec_cmd("nm-applet --indicator")
-    hl.exec_cmd("blueman-applet")
     for _, cmd in ipairs(look.autostart or {}) do hl.exec_cmd(cmd) end
 end)
 
