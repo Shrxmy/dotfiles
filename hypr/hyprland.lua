@@ -25,7 +25,7 @@ hl.monitor({ output = "", mode = "preferred", position = "auto", scale = "1" }) 
 ---- PROGRAMS ----
 local terminal    = "alacritty"
 local fileManager = "dolphin"
-local browser     = "brave-origin-stable --password-store=kwallet6" -- same key store as Plasma
+local browser     = "brave-origin-stable --password-store=kwallet6 --enable-features=AcceleratedVideoDecodeLinuxGL,AcceleratedVideoDecodeLinuxZeroCopyGL" -- same key store as Plasma
 local menu        = "fuzzel"
 
 local look = {} -- filled below by the optional look.lua (u-da-real-ricing)

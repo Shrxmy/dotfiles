@@ -1,0 +1,4 @@
+# Realtek RTL8111/8168 Ethernet: the r8169 driver leaves PCIe ASPM off, which keeps the CPU package out of its
+# deep idle states (PC8/PC10) even with no cable plugged in. Allow the low-power link states when it binds.
+# Install: sudo install -m 644 udev/70-r8169-aspm.rules /etc/udev/rules.d/
+ACTION=="bind", SUBSYSTEM=="pci", DRIVER=="r8169", ATTR{vendor}=="0x10ec", ATTR{device}=="0x8168", RUN+="/bin/sh -c 'for s in l1_aspm l1_1_aspm l1_2_aspm l1_1_pcipm l1_2_pcipm; do echo 1 > /sys%p/link/$$s; done'"
