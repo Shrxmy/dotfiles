@@ -169,6 +169,7 @@ main() {
     link_file "$DOTFILES_DIR/hypr/hyprlock.conf" "$HOME/.config/hypr/hyprlock.conf"
     link_file "$DOTFILES_DIR/hypr/hypridle.conf" "$HOME/.config/hypr/hypridle.conf"
     link_file "$DOTFILES_DIR/hypr/wallpaper.sh" "$HOME/.config/hypr/wallpaper.sh"
+    link_file "$DOTFILES_DIR/hypr/accent.py" "$HOME/.config/hypr/accent.py"
     link_file "$DOTFILES_DIR/hypr/cheatsheet.txt" "$HOME/.config/hypr/cheatsheet.txt"
     link_file "$DOTFILES_DIR/waybar/config.jsonc" "$HOME/.config/waybar/config.jsonc"
     link_file "$DOTFILES_DIR/waybar/style.css" "$HOME/.config/waybar/style.css"

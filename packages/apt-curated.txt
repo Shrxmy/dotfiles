@@ -113,6 +113,7 @@ pciutils
 hyprland
 xdg-desktop-portal-hyprland
 swaybg
+imv
 hyprlock
 hypridle
 hyprpolkitagent

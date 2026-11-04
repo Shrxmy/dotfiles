@@ -31,13 +31,21 @@ hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("QT_QPA_PLATFORMTHEME", "kde")
 
 ---- LOOK AND FEEL ----
+-- active border follows the wallpaper accent (written by wallpaper.sh); amber until one is picked
+local accent = "cc9166"
+local accent_file = io.open(os.getenv("HOME") .. "/.local/state/wallpaper/accent")
+if accent_file then
+    accent = (accent_file:read("l") or ""):match("^%x%x%x%x%x%x") or accent
+    accent_file:close()
+end
+
 hl.config({
     general = {
         gaps_in  = 4,
         gaps_out = 8,
         border_size = 2,
         col = {
-            active_border   = "rgb(cc9166)",
+            active_border   = "rgb(" .. accent .. ")",
             inactive_border = "rgb(3d3d40)",
         },
         resize_on_border = true,
