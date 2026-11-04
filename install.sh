@@ -144,47 +144,17 @@ main() {
   link_file "$DOTFILES_DIR/shell/linux.sh" "$HOME/.config/shell/linux.sh"
   link_file "$DOTFILES_DIR/shell/macos.sh" "$HOME/.config/shell/macos.sh"
 
-  # oh-my-posh
-  link_file "$DOTFILES_DIR/oh-my-posh/theme.omp.json" "$HOME/.config/oh-my-posh/theme.omp.json"
-
-  # eza (ls with icons)
-  link_file "$DOTFILES_DIR/eza/theme.yml" "$HOME/.config/eza/theme.yml"
-
   # npm
   link_file "$DOTFILES_DIR/npm/npmrc" "$HOME/.npmrc"
-
-  # fastfetch
-  link_file "$DOTFILES_DIR/fastfetch/config.jsonc" "$HOME/.config/fastfetch/config.jsonc"
-  link_file "$DOTFILES_DIR/fastfetch/kirby.txt" "$HOME/.config/fastfetch/kirby.txt"
 
   # Alacritty terminal (Linux + macOS)
   link_file "$DOTFILES_DIR/alacritty/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
 
-  # dunst (Linux notification daemon)
   if [[ "$(uname -s)" == "Linux" ]]; then
-    link_file "$DOTFILES_DIR/dunst/dunstrc" "$HOME/.config/dunst/dunstrc"
-
-    # Hyprland session (Waybar bar, Fuzzel launcher, Quickshell wallpaper, hyprlock/hypridle)
+    # Hyprland core (looks: install u-da-real-ricing, which adds hypr/look.lua)
     link_file "$DOTFILES_DIR/hypr/hyprland.lua" "$HOME/.config/hypr/hyprland.lua"
-    link_file "$DOTFILES_DIR/hypr/hyprlock.conf" "$HOME/.config/hypr/hyprlock.conf"
     link_file "$DOTFILES_DIR/hypr/hypridle.conf" "$HOME/.config/hypr/hypridle.conf"
-    link_file "$DOTFILES_DIR/hypr/wallpaper.sh" "$HOME/.config/hypr/wallpaper.sh"
-    link_file "$DOTFILES_DIR/hypr/accent.py" "$HOME/.config/hypr/accent.py"
-    link_file "$DOTFILES_DIR/quickshell/wallpaper" "$HOME/.config/quickshell/wallpaper"
-    link_file "$DOTFILES_DIR/quickshell/wallpicker" "$HOME/.config/quickshell/wallpicker"
     link_file "$DOTFILES_DIR/hypr/cheatsheet.txt" "$HOME/.config/hypr/cheatsheet.txt"
-    link_file "$DOTFILES_DIR/waybar/config.jsonc" "$HOME/.config/waybar/config.jsonc"
-    link_file "$DOTFILES_DIR/waybar/style.css" "$HOME/.config/waybar/style.css"
-    link_file "$DOTFILES_DIR/fuzzel/fuzzel.ini" "$HOME/.config/fuzzel/fuzzel.ini"
-    link_file "$DOTFILES_DIR/waybar/cpucat.sh" "$HOME/.config/waybar/cpucat.sh"
-
-    # Waycat font for the animated bar cat: fetched from upstream (no license to redistribute it here)
-    if [[ ! -f "$HOME/.local/share/fonts/Waycat.ttf" ]]; then
-      run_cmd mkdir -p "$HOME/.local/share/fonts"
-      run_cmd curl -fsSL -o "$HOME/.local/share/fonts/Waycat.ttf" \
-        https://raw.githubusercontent.com/CarloCattano/waycat/main/fonts/Waycat.ttf
-      run_cmd fc-cache -f "$HOME/.local/share/fonts"
-    fi
   fi
 
   # htop
@@ -208,7 +178,6 @@ main() {
   if [[ "$(uname -s)" == "Linux" ]]; then
     # Konsole (KDE terminal)
     link_file "$DOTFILES_DIR/konsole/Solyvie.profile" "$HOME/.local/share/konsole/Solyvie.profile"
-    link_file "$DOTFILES_DIR/konsole/Solyvie-Alacritty.colorscheme" "$HOME/.local/share/konsole/Solyvie-Alacritty.colorscheme"
 
     link_file "$DOTFILES_DIR/gtk/gtk-3.0/settings.ini" "$HOME/.config/gtk-3.0/settings.ini"
     link_file "$DOTFILES_DIR/gtk/gtk-4.0/settings.ini" "$HOME/.config/gtk-4.0/settings.ini"
@@ -224,7 +193,7 @@ main() {
     fi
   fi
 
-  log "Done."
+  log "Done. For the looks (bar, wallpaper, colors): https://github.com/Shrxmy/u-da-real-ricing"
 }
 
 main "$@"

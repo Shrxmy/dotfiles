@@ -5,7 +5,7 @@ Super + Enter              terminal (Alacritty)
 Super + Space              app launcher (type, Enter to open, Esc to close)
 Super + B                  browser (Brave)
 Super + E                  files (Dolphin)
-Super + W                  wallpaper carousel (arrows/wheel browse, Enter or click apply, Esc close)
+Super + W                  wallpaper carousel (ricing repo): arrows/wheel browse, Enter apply, Esc close
 ── WINDOWS ───────────────────────────────────────────────────────────────────
 Super + Q                  close window
 Alt + Tab                  next window (brings it to the front)
@@ -61,9 +61,11 @@ pkill waybar; waybar & disown              restart the bar
 hyprctl reload                             reload Hyprland config
 Hyprland --verify-config                   check the config for errors
 ── CONFIG FILES (~/Documents/dotfiles) ───────────────────────────────────────
-hypr/hyprland.lua          keybinds, look, autostart
-hypr/hyprlock.conf         lock screen
+hypr/hyprland.lua          keybinds, autostart, window rules
 hypr/hypridle.conf         idle timers
+── LOOKS (~/Documents/u-da-real-ricing) ──────────────────────────────────────
+hypr/look.lua              borders, blur, animations, glass
+hypr/hyprlock.conf         lock screen
 waybar/config.jsonc        bar modules     · waybar/style.css  bar colors
 fuzzel/fuzzel.ini          launcher look
 eza/theme.yml              ls colors / icons

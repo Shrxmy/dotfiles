@@ -1,14 +1,14 @@
 # dotfiles
 
-my setup for debian (also works on mac, or "darwin" as it likes to call itself). everything's themed in a warm retro palette i call **retro clean**.
+my setup for debian (also works on mac, or "darwin" as it likes to call itself). this repo is the functional part: it works on its own with plain looks. the ricing (bar, wallpaper, colors, the warm **retro clean** palette) lives in [u-da-real-ricing](https://github.com/Shrxmy/u-da-real-ricing).
 
 ## what's in here
 
-- **hyprland**: flat, sharp tiling setup with waybar, fuzzel, hyprlock, a wallpaper picker (`super + w`) and a cheat sheet (`super + /`) for when i forget my own keybinds
-- **shell**: zsh + oh-my-posh, autosuggestions, `ls` with colored icons (eza), micromamba
-- **terminal**: alacritty / konsole, fastfetch with a pixel kirby
+- **hyprland**: keybinds, touchpad, autostart and window rules, plus a cheat sheet (`super + /`) for when i forget my own keybinds. it loads the ricing repo's `look.lua` if it's there
+- **shell**: zsh, autosuggestions, `ls` with icons (eza), micromamba
+- **terminal**: alacritty / konsole
 - **pi**: my pi agent settings, prompts and themes
-- plus git, npm, dunst, gtk, htop, gh and pgcli configs
+- plus git, npm, gtk, htop, gh and pgcli configs
 
 ## install
 
@@ -24,7 +24,3 @@ packages i actually use are in `packages/apt-curated.txt`, so run `./scripts/ins
 ## adding stuff
 
 drop the file in here, add a `link_file` line to `install.sh`, run it.
-
-## credits
-
-the little cat in the bar uses the font from [waycat](https://github.com/CarloCattano/waycat). it's downloaded on install, not included here.
