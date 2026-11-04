@@ -8,3 +8,15 @@ fi
 if [ -d "$HOME/.local/bin" ]; then
   export PATH="$HOME/.local/bin:$PATH"
 fi
+
+# Hyprland on the Intel GPU only: Lenovo's Hybrid-Auto mode pulls the NVIDIA GPU when the charger is
+# unplugged, and a compositor holding it then crashes. HDMI/DP are wired to the NVIDIA GPU, so keep it
+# if an external screen is connected at login (unplugging during that session would still be unsafe).
+if [ -z "${AQ_DRM_DEVICES:-}" ] && [ -e /dev/dri/by-path/pci-0000:00:02.0-card ]; then
+  _external=0
+  for _s in /sys/class/drm/*/status; do # always matches (eDP), so no zsh "no matches" error
+    case "$_s" in */card*-HDMI-*|*/card*-DP-*) [ "$(cat "$_s" 2>/dev/null)" = connected ] && _external=1 ;; esac
+  done
+  [ "$_external" = 0 ] && export AQ_DRM_DEVICES="$(readlink -f /dev/dri/by-path/pci-0000:00:02.0-card)"
+  unset _s _external
+fi
