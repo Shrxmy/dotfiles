@@ -28,9 +28,10 @@ packages i actually use are in `packages/apt-curated.txt`, so run `./scripts/ins
 ```bash
 sudo install -m 644 tlp/50-battery.conf /etc/tlp.d/ && sudo tlp start
 sudo systemctl disable --now nvidia-persistenced   # it holds the gpu open (see below)
+sudo install -m 644 modprobe/no-nvidia-display.conf /etc/modprobe.d/   # then reboot
 ```
 
-the bios is on **hybrid-auto**, which pulls the nvidia gpu when the charger is unplugged. anything holding the gpu then crashes, so `zsh/zprofile` starts hyprland on the intel gpu only (unless an external screen is plugged in at login, since hdmi/dp go through the nvidia gpu) and tlp leaves the gpu alone.
+the bios is on **hybrid-auto**, which pulls the nvidia gpu when the charger is unplugged. anything holding the gpu then crashes, so `zsh/zprofile` starts hyprland on the intel gpu only (unless an external screen is plugged in at login, since hdmi/dp go through the nvidia gpu) and tlp leaves the gpu alone. hyprland still dies if *any* gpu display device disappears, so `modprobe/no-nvidia-display.conf` stops nvidia's display driver from loading at all. cuda doesn't need it, so ml still gets the gpu when it's plugged in. for an external screen: `sudo modprobe nvidia_drm`, then log out and back in.
 
 unplugging also drops the screen to 60 hz (and the ricing repo turns off blur and animations). `hypr/powerwatch.sh` reloads hyprland when the charger changes.
 
