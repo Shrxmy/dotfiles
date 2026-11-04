@@ -2,7 +2,7 @@
 # Wallpaper picker for Hyprland, with accent colors taken from the wallpaper.
 #   wallpaper.sh           fullscreen preview (imv): arrows browse, Enter applies, Esc/q cancels
 #   wallpaper.sh set FILE  apply FILE and recolor the accents
-#   wallpaper.sh restore   re-apply the saved wallpaper and accents (run at login)
+#   wallpaper.sh restore   start the wallpaper process with the saved wallpaper and accents (run at login)
 set -euo pipefail
 
 dir="$HOME/Pictures/Wallpapers"
@@ -11,13 +11,19 @@ current="$state/current" # symlink; hyprlock reads it too
 default="$dir/Space Wide.jpg"
 here="$(dirname "$(readlink -f "$0")")"
 
+# Resident Quickshell wallpaper (quickshell/wallpaper) draws and animates the change.
+# Mesa EGL keeps the NVIDIA GPU asleep; jemalloc decay returns freed memory (measured ~100 -> ~69 MB).
+start_wallpaper() {
+  local mesa=/usr/share/glvnd/egl_vendor.d/50_mesa.json
+  [ -f "$mesa" ] || mesa=""
+  env ${mesa:+__EGL_VENDOR_LIBRARY_FILENAMES=$mesa} \
+    MALLOC_CONF=narenas:1,tcache:false,dirty_decay_ms:0,muzzy_decay_ms:0,background_thread:false \
+    qs -c wallpaper -n -d >/dev/null 2>&1 9>&- || true # -n: no-op if already running
+}
+
 apply() {
-  # Start the new swaybg before killing the old one, so there's no bare-background flash.
-  local old
-  old=$(pgrep -x swaybg || true)
-  setsid -f swaybg -m fill -i "$1" >/dev/null 2>&1 9>&- # don't let swaybg hold the lock
-  sleep 0.3 # shortcut: fixed wait for the new swaybg to draw; poll if it ever flashes on slow images
-  [ -z "$old" ] || kill $old 2>/dev/null || true
+  # Not running yet: start it; it shows the saved symlink on its own.
+  qs -c wallpaper ipc call wallpaper set "$1" >/dev/null 2>&1 || start_wallpaper
 }
 
 # One switch at a time: overlapping runs finished out of order (wallpaper and accent mismatched).

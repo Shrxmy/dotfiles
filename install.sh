@@ -164,12 +164,13 @@ main() {
   if [[ "$(uname -s)" == "Linux" ]]; then
     link_file "$DOTFILES_DIR/dunst/dunstrc" "$HOME/.config/dunst/dunstrc"
 
-    # Hyprland session (Waybar bar, Fuzzel launcher, swaybg, hyprlock/hypridle)
+    # Hyprland session (Waybar bar, Fuzzel launcher, Quickshell wallpaper, hyprlock/hypridle)
     link_file "$DOTFILES_DIR/hypr/hyprland.lua" "$HOME/.config/hypr/hyprland.lua"
     link_file "$DOTFILES_DIR/hypr/hyprlock.conf" "$HOME/.config/hypr/hyprlock.conf"
     link_file "$DOTFILES_DIR/hypr/hypridle.conf" "$HOME/.config/hypr/hypridle.conf"
     link_file "$DOTFILES_DIR/hypr/wallpaper.sh" "$HOME/.config/hypr/wallpaper.sh"
     link_file "$DOTFILES_DIR/hypr/accent.py" "$HOME/.config/hypr/accent.py"
+    link_file "$DOTFILES_DIR/quickshell/wallpaper" "$HOME/.config/quickshell/wallpaper"
     link_file "$DOTFILES_DIR/hypr/cheatsheet.txt" "$HOME/.config/hypr/cheatsheet.txt"
     link_file "$DOTFILES_DIR/waybar/config.jsonc" "$HOME/.config/waybar/config.jsonc"
     link_file "$DOTFILES_DIR/waybar/style.css" "$HOME/.config/waybar/style.css"

@@ -109,10 +109,10 @@ poppler-utils
 usbutils
 pciutils
 
-# Hyprland session (hypr* packages come from trixie-backports)
+# Hyprland session (hypr* packages and quickshell come from trixie-backports)
 hyprland
 xdg-desktop-portal-hyprland
-swaybg
+quickshell
 imv
 hyprlock
 hypridle
