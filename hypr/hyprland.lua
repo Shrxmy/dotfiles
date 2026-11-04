@@ -31,13 +31,17 @@ local menu        = "fuzzel"
 local look = {} -- filled below by the optional look.lua (u-da-real-ricing)
 
 ---- AUTOSTART ----
+-- GPU selection from zsh/zprofile, handed to systemd user services (polkit agent, portals) so they don't load
+-- NVIDIA's libraries either; cleared first so an external-screen login doesn't inherit a stale Intel-only value
+local gpu_env = "AQ_DRM_DEVICES __EGL_VENDOR_LIBRARY_FILENAMES __GLX_VENDOR_LIBRARY_NAME VK_LOADER_DRIVERS_DISABLE"
+
 hl.on("hyprland.start", function()
     hl.exec_cmd("/usr/share/libpam-kwallet-common/pam_kwallet_init") -- unlock KWallet with the login password (SDDM PAM)
     hl.exec_cmd("waybar")
     hl.exec_cmd("dunst")
     hl.exec_cmd("hypridle")
     hl.exec_cmd("~/.config/hypr/powerwatch.sh") -- reload on charger plug/unplug
-    hl.exec_cmd("systemctl --user start hyprpolkitagent")
+    hl.exec_cmd("systemctl --user unset-environment " .. gpu_env .. "; systemctl --user import-environment " .. gpu_env .. "; systemctl --user start hyprpolkitagent")
     hl.exec_cmd("nm-applet --indicator")
     hl.exec_cmd("blueman-applet")
     for _, cmd in ipairs(look.autostart or {}) do hl.exec_cmd(cmd) end
