@@ -1,5 +1,5 @@
 // Resident wallpaper: draws the wallpaper on the background layer and animates changes
-// (circle growing from the center). Idle = one plain image per screen, no timers, no effects.
+// (circle growing from the center). Idle = no timers or animations; nothing redraws until a switch.
 //   qs -c wallpaper -d                                   start (Hyprland autostart)
 //   qs -c wallpaper ipc call wallpaper set /path/img     switch with transition
 import QtQuick
@@ -34,13 +34,13 @@ ShellRoot {
             anchors { top: true; bottom: true; left: true; right: true }
             color: "#25222a"
 
-            // Effect + mask buffers exist only while switching; idle is one plain Image.
+            // Idle: the plain image plus an idle (empty) effect; nothing redraws until a switch.
             property bool busy: false
 
             function go(src) {
-                if (grow.running || kick.running) { grow.stop(); kick.stop(); settle() } // jump to the newest target
+                if (grow.running) { grow.stop(); settle() } // jump to the newest target
                 if (src === shown.source.toString()) { incoming.source = ""; busy = false; return }
-                busy = true // effect must be visible before the animation starts, or it never draws
+                busy = true // a switch is in progress
                 incoming.source = src // transition starts once it has loaded
             }
 
@@ -76,7 +76,7 @@ ShellRoot {
                 asynchronous: true
                 cache: true
                 onStatusChanged: {
-                    if (status === Image.Ready && win.busy) kick.restart()
+                    if (status === Image.Ready && win.busy) grow.restart()
                     else if (status === Image.Error) { source = ""; win.busy = false } // unreadable: keep current
                 }
             }
@@ -85,7 +85,11 @@ ShellRoot {
                 id: mask
                 anchors.fill: parent
                 visible: false
-                layer.enabled: win.busy
+                // Must exist from startup: toggling it on for a switch leaves the first transitions undrawn.
+                // Quarter resolution is plenty for a soft-edged circle (~0.5 MB instead of ~8 MB).
+                layer.enabled: true
+                layer.textureSize: Qt.size(win.width / 4, win.height / 4)
+                layer.smooth: true
                 property real r: 0
                 Rectangle {
                     x: mask.width / 2 - mask.r
@@ -98,16 +102,13 @@ ShellRoot {
 
             MultiEffect {
                 anchors.fill: parent
-                visible: win.busy
+                visible: true // same reason; with no incoming image it draws nothing at idle
                 source: incoming
                 maskEnabled: true
                 maskSource: mask
                 maskThresholdMin: 0.5
                 maskSpreadAtMin: 1.0 // soft edge on the circle
             }
-
-            // A couple of frames for the freshly shown effect to set up (cached images load instantly).
-            Timer { id: kick; interval: 50; onTriggered: grow.restart() }
 
             NumberAnimation {
                 id: grow
