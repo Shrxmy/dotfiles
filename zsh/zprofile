@@ -17,6 +17,14 @@ if [ -z "${AQ_DRM_DEVICES:-}" ] && [ -e /dev/dri/by-path/pci-0000:00:02.0-card ]
   for _s in /sys/class/drm/*/status; do # always matches (eDP), so no zsh "no matches" error
     case "$_s" in */card*-HDMI-*|*/card*-DP-*) [ "$(cat "$_s" 2>/dev/null)" = connected ] && _external=1 ;; esac
   done
-  [ "$_external" = 0 ] && export AQ_DRM_DEVICES="$(readlink -f /dev/dri/by-path/pci-0000:00:02.0-card)"
+  if [ "$_external" = 0 ]; then
+    export AQ_DRM_DEVICES="$(readlink -f /dev/dri/by-path/pci-0000:00:02.0-card)"
+    # Also keep every app's GL/EGL/Vulkan off the NVIDIA driver: its libraries hold the GPU open inside
+    # each process (Hyprland, Xwayland, browsers...), which the GPU being pulled takes down with it.
+    # Run something on the NVIDIA GPU on purpose with `nvrun <app>` (shell/common.sh).
+    [ -f /usr/share/glvnd/egl_vendor.d/50_mesa.json ] && export __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json
+    export __GLX_VENDOR_LIBRARY_NAME=mesa
+    export VK_LOADER_DRIVERS_DISABLE='*nvidia*'
+  fi
   unset _s _external
 fi
