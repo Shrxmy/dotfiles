@@ -1,4 +1,5 @@
 {
+  "reload_style_on_change": true, // picks up the wallpaper accent (imported accent.css) without a full reload
   "layer": "top",
   "position": "top",
   "height": 26,

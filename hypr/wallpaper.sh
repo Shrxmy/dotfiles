@@ -12,8 +12,19 @@ default="$dir/Space Wide.jpg"
 here="$(dirname "$(readlink -f "$0")")"
 
 apply() {
-  pkill -x swaybg || true
-  setsid -f swaybg -m fill -i "$1" >/dev/null 2>&1
+  # Start the new swaybg before killing the old one, so there's no bare-background flash.
+  local old
+  old=$(pgrep -x swaybg || true)
+  setsid -f swaybg -m fill -i "$1" >/dev/null 2>&1 9>&- # don't let swaybg hold the lock
+  sleep 0.3 # shortcut: fixed wait for the new swaybg to draw; poll if it ever flashes on slow images
+  [ -z "$old" ] || kill $old 2>/dev/null || true
+}
+
+# One switch at a time: overlapping runs finished out of order (wallpaper and accent mismatched).
+lock() {
+  mkdir -p "$state"
+  exec 9>"$state/lock"
+  flock 9
 }
 
 save() {
@@ -33,7 +44,7 @@ write_accent() { # ACCENT SAND (hex, no '#')
 # Live recolor; each app may not be running, so none of this is fatal.
 push_accent() { # ACCENT SAND
   hyprctl eval "hl.config({ general = { col = { active_border = \"rgb($1)\" } } })" >/dev/null 2>&1 || true
-  pkill -USR2 -x waybar || true # reload style
+  # Waybar reloads its style itself (reload_style_on_change); SIGUSR2 rebuilt the bar and could kill it.
   local cava="$HOME/.config/cava/config"
   if [ -f "$cava" ]; then
     sed -i -e "s/^gradient_color_4 = .*/gradient_color_4 = '#$1'/" \
@@ -46,6 +57,7 @@ case "${1:-}" in
   set)
     img=$(readlink -f "${2:?usage: wallpaper.sh set FILE}")
     [ -f "$img" ] || exit 1
+    lock
     save "$img"
     apply "$img"
     # shellcheck disable=SC2046 # two hex words
@@ -54,6 +66,7 @@ case "${1:-}" in
     push_accent "$1" "$2"
     ;;
   restore)
+    lock
     img=$(readlink -f "$current" 2>/dev/null || true)
     [ -f "$img" ] || { img=$default; save "$img"; }
     apply "$img"
