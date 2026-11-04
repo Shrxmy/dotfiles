@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Reload Hyprland when the charger is plugged in or unplugged: hyprland.lua (60/144 Hz) and the
-# optional look.lua (blur, animations) read the power state each time the config loads.
+# On charger plug/unplug: reload Hyprland (hyprland.lua picks 60/144 Hz, the
+# optional look.lua blur/animations) and set brightness 50% on AC / 30% on battery.
 # Sleeps inside udevadm until the kernel reports a power_supply event: no polling.
 # Started once by hyprland.lua's autostart.
 set -u
@@ -22,4 +22,6 @@ udevadm monitor --udev --subsystem-match=power_supply 2>/dev/null | while read -
   [ "$now" = "$last" ] && continue # battery level updates also arrive here
   last=$now
   hyprctl reload >/dev/null 2>&1
+  # only on the transition, so a level set by hand in between sticks
+  if [ "$now" = 1 ]; then brightnessctl -q set 50%; else brightnessctl -q set 30%; fi
 done
