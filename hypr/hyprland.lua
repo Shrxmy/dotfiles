@@ -38,7 +38,7 @@ local gpu_env = "AQ_DRM_DEVICES __EGL_VENDOR_LIBRARY_FILENAMES __GLX_VENDOR_LIBR
 hl.on("hyprland.start", function()
     hl.exec_cmd("/usr/share/libpam-kwallet-common/pam_kwallet_init") -- unlock KWallet with the login password (SDDM PAM)
     hl.exec_cmd("waybar")
-    hl.exec_cmd("dunst")
+    if not look.notifications then hl.exec_cmd("dunst") end -- the ricing can bring its own notification daemon
     hl.exec_cmd("hypridle")
     hl.exec_cmd("~/.config/hypr/powerwatch.sh") -- reload on charger plug/unplug
     hl.exec_cmd("systemctl --user unset-environment " .. gpu_env .. "; systemctl --user import-environment " .. gpu_env .. "; systemctl --user start hyprpolkitagent")
